@@ -9,11 +9,17 @@ env:
   # time zone
   TZ: Asia/Shanghai
 
-  # network proxy aggregate config
+  # network proxy aggregate config (optional): base for sites/groups/storage
   SUBSCRIBE_CONF: ${{ secrets.SUBSCRIBE_CONF }}
 
-  # token
-  PUSH_TOKEN: ${{ secrets.PUSH_TOKEN }}
+  # token: prefer the dedicated one, fallback to the collect token
+  PUSH_TOKEN: ${{ secrets.PROCESS_GIST_PAT || secrets.GIST_PAT }}
+
+  # gist which collect writes to, used as the default node source
+  GIST_LINK: ${{ secrets.GIST_LINK }}
+
+  # gist which process writes to, 'username/gist_id'
+  PROCESS_GIST_LINK: ${{ secrets.PROCESS_GIST_LINK }}
 
   # not check connective
   SKIP_ALIVE_CHECK: ${{ vars.SKIP_ALIVE_CHECK }}
@@ -47,8 +53,11 @@ jobs:
       - name: Install
         run: pip3 install -r requirements.txt
 
+      - name: Configure
+        run: python -u subscribe/gistconf.py -o data/process.json
+
       - name: Process
-        run: python -u subscribe/process.py --overwrite
+        run: python -u subscribe/process.py -s data/process.json --overwrite
 
       - name: Timestamp
         run: date

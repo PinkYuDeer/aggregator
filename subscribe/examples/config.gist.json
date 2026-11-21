@@ -1,0 +1,54 @@
+{
+  "sites": [
+    {
+      "name": "collect-gist",
+      "subscribe": [""],
+      "domain": "",
+      "enable": true,
+      "rename": "",
+      "include": "",
+      "exclude": "",
+      "push_to": ["all"],
+      "ignore_default_exclude": true,
+      "check_alive": true,
+      "max_rate": 100,
+      "count": 1,
+      "coupon": "",
+      "require_tls": false
+    }
+  ],
+  "groups": {
+    "all": {
+      "emoji": true,
+      "list_only": true,
+      "targets": {
+        "clash": "all-clash",
+        "v2ray": "all-v2ray",
+        "singbox": "all-singbox"
+      },
+      "regularize": {
+        "enable": false
+      }
+    }
+  },
+  "storage": {
+    "engine": "gist",
+    "items": {
+      "all-clash": {
+        "username": "",
+        "gist_id": "",
+        "filename": "clash.yaml"
+      },
+      "all-v2ray": {
+        "username": "",
+        "gist_id": "",
+        "filename": "v2ray.txt"
+      },
+      "all-singbox": {
+        "username": "",
+        "gist_id": "",
+        "filename": "singbox.json"
+      }
+    }
+  }
+}

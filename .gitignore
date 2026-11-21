@@ -134,3 +134,6 @@ config.yaml
 generate.ini
 config.json
 config.local.json
+
+# generated runtime files (gistconf.py / collect.py / process.py)
+/data/
